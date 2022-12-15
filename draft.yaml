@@ -1,0 +1,13 @@
+models:
+  Product:
+    uuid: uuid
+    name: string:100
+    description: text
+    price: float
+    relationships:
+      belongsTo: Category
+  Category:
+    uuid: uuid
+    name: string:50
+    relationships:
+      hasMany: Product
