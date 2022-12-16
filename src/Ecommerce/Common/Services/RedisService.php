@@ -79,5 +79,5 @@ abstract class RedisService
     }
 
     // 获取服务名称
-    abstract public function getServiceName(): string;
+    abstract function getServiceName(): string;
 }

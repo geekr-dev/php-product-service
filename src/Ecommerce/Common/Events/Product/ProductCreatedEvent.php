@@ -8,10 +8,18 @@ use Ecommerce\Common\Events\Event;
 
 class ProductCreatedEvent extends Event
 {
-    public string $type = Events::PRODUCT_CREATED;
+    const TYPE = Events::PRODUCT_CREATED;
 
     public function __construct(
         public readonly ProductData $data
     ) {
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'type' => self::TYPE,
+            'data' => $this->data
+        ];
     }
 }

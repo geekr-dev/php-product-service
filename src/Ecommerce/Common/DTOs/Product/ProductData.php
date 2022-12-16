@@ -2,8 +2,7 @@
 
 namespace Ecommerce\Common\DTOs\Product;
 
-use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
+use PhpParser\Node\Expr\Cast\Unset_;
 
 class ProductData
 {
@@ -19,14 +18,14 @@ class ProductData
     public static function fromArray(array $data): self
     {
         return new static(
-            $data['id'],
+            $data['id'] ?? 0,
             $data['name'],
             $data['description'],
             $data['price'],
             new CategoryData(
                 $data['category']['id'],
-                $data['category']['name'],
-            )
+                $data['category']['name'] ?? ''
+            ),
         );
     }
 

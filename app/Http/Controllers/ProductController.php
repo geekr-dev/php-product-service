@@ -21,16 +21,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param \Ecommerce\Common\DTOs\Product\ProductData $data
@@ -40,15 +30,9 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request, CreateProductAction $action)
     {
         $data = ProductData::fromArray([
-            [
-                'id' => $request->id,
-                'name' => $request->name,
-                'description' => $request->description,
-                'price' => $request->price,
-                'category' => [
-                    'id' => $request->categoryId,
-                    'name' => $request->categoryName,
-                ]
+            ...$request->toArray(),
+            'category' => [
+                'id' => $request->categoryId,
             ]
         ]);
         $product = $action->execute($data);
@@ -57,6 +41,7 @@ class ProductController extends Controller
         ], Response::HTTP_CREATED);
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -64,17 +49,6 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

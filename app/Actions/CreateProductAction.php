@@ -19,9 +19,11 @@ class CreateProductAction
             ...$data->toArray(),
             'category_id' => $data->category->id,
         ]);
+
         $this->redis->publishProductCreated(
             $product->toData(),
         );
+
         return $product;
     }
 }

@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Ecommerce\Common\DTOs\Product\CategoryData;
 use Ecommerce\Common\DTOs\Product\ProductData;
+use Ecommerce\Common\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +18,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
+        'category_id',
         'uuid',
         'name',
         'description',
@@ -50,5 +52,10 @@ class Product extends Model
                 name: $this->category->name,
             )
         );
+    }
+
+    public function getRouteKey()
+    {
+        return 'uuid';
     }
 }
