@@ -506,16 +506,16 @@
         },
         {
             "name": "geekr-dev/php-ecommerce",
-            "version": "v1.0.3-alpha",
+            "version": "v1.0.4-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/geekr-dev/php-ecommerce-common.git",
-                "reference": "26bf6fbeeb5ad672a6d247cdd42d658781dc7161"
+                "reference": "783e45eca5da7a7ad7079ad42fe85a46c2a0e19b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geekr-dev/php-ecommerce-common/zipball/26bf6fbeeb5ad672a6d247cdd42d658781dc7161",
-                "reference": "26bf6fbeeb5ad672a6d247cdd42d658781dc7161",
+                "url": "https://api.github.com/repos/geekr-dev/php-ecommerce-common/zipball/783e45eca5da7a7ad7079ad42fe85a46c2a0e19b",
+                "reference": "783e45eca5da7a7ad7079ad42fe85a46c2a0e19b",
                 "shasum": ""
             },
             "require": {
@@ -541,9 +541,9 @@
             ],
             "support": {
                 "issues": "https://github.com/geekr-dev/php-ecommerce-common/issues",
-                "source": "https://github.com/geekr-dev/php-ecommerce-common/tree/v1.0.3-alpha"
+                "source": "https://github.com/geekr-dev/php-ecommerce-common/tree/v1.0.4-alpha"
             },
-            "time": "2022-12-16T12:52:19+00:00"
+            "time": "2022-12-16T13:30:59+00:00"
         },
         {
             "name": "graham-campbell/result-type",

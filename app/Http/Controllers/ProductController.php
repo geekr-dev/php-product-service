@@ -32,7 +32,7 @@ class ProductController extends Controller
         $data = ProductData::fromArray([
             ...$request->toArray(),
             'category' => [
-                'id' => $request->categoryId,
+                'uuid' => $request->categoryId,
             ]
         ]);
         $product = $action->execute($data);

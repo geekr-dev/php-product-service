@@ -43,12 +43,12 @@ class Product extends Model
     public function toData(): ProductData
     {
         return new ProductData(
-            id: $this->id,
+            uuid: $this->uuid,
             name: $this->name,
             description: $this->description,
             price: $this->price,
             category: new CategoryData(
-                id: $this->category_id,
+                uuid: $this->category->uuid,
                 name: $this->category->name,
             )
         );
