@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Ecommerce\Common\Events\Event;
 use Illuminate\Support\Facades\Redis;
 
-class RedisService
+abstract class RedisService
 {
     const ALL_EVENTS_KEY = 'events';
     const PROCESSED_EVENTS_KEY = '1';
@@ -79,8 +79,5 @@ class RedisService
     }
 
     // 获取服务名称
-    public function getServiceName(): string
-    {
-        return 'base';
-    }
+    abstract public function getServiceName(): string;
 }

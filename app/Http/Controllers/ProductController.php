@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateProductAction;
+use App\Http\Requests\StoreProductRequest;
 use Ecommerce\Common\DTOs\Product\ProductData;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -32,12 +33,24 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Ecommerce\Common\DTOs\Product\ProductData $data
-     * @param App\Actions\CreateProductAction $action
+     * @param \Ecommerce\Common\DTOs\Product\ProductData $data
+     * @param \App\Actions\CreateProductAction $action
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductData $data, CreateProductAction $action)
+    public function store(StoreProductRequest $request, CreateProductAction $action)
     {
+        $data = ProductData::fromArray([
+            [
+                'id' => $request->id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'category' => [
+                    'id' => $request->categoryId,
+                    'name' => $request->categoryName,
+                ]
+            ]
+        ]);
         $product = $action->execute($data);
         return response([
             'data' => $product->toData(),

@@ -16,7 +16,7 @@ class CreateProductAction
     public function execute(ProductData $data): Product
     {
         $product = Product::create([
-            ...$data->all(),
+            ...$data->toArray(),
             'category_id' => $data->category->id,
         ]);
         $this->redis->publishProductCreated(

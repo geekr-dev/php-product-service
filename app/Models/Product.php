@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
+use Ecommerce\Common\DTOs\Product\CategoryData;
 use Ecommerce\Common\DTOs\Product\ProductData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\LaravelData\WithData;
 
 class Product extends Model
 {
-    use HasFactory, WithData;
-
-    protected $dataClass = ProductData::class;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -38,5 +36,19 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function toData(): ProductData
+    {
+        return new ProductData(
+            id: $this->id,
+            name: $this->name,
+            description: $this->description,
+            price: $this->price,
+            category: new CategoryData(
+                id: $this->category_id,
+                name: $this->category->name,
+            )
+        );
     }
 }

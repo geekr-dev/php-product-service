@@ -12,6 +12,7 @@ class RedisService extends BaseRedisService
     {
         return 'products';
     }
+
     public function publishProductCreated(ProductData $data): void
     {
         $this->publish(new ProductCreatedEvent($data));

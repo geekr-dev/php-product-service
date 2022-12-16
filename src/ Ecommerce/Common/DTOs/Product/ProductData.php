@@ -4,9 +4,8 @@ namespace Ecommerce\Common\DTOs\Product;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
-use Spatie\LaravelData\Data;
 
-class ProductData extends Data
+class ProductData
 {
     public function __construct(
         public readonly ?int $id,
@@ -17,32 +16,22 @@ class ProductData extends Data
     ) {
     }
 
-    public static function rules()
+    public static function fromArray(array $data): self
     {
-        return [
-            'categoryId' => 'required|exists:categories,id',
-            'name' => 'required|string|unique:products,name',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-        ];
+        return new static(
+            $data['id'],
+            $data['name'],
+            $data['description'],
+            $data['price'],
+            new CategoryData(
+                $data['category']['id'],
+                $data['category']['name'],
+            )
+        );
     }
 
-    public static function withValidator(Validator $validator): void
+    public function toArray(): array
     {
-        $validator->setRules(self::rules());
-    }
-
-    public static function fromRequest(Request $request): self
-    {
-        return self::from([
-            'id' => $request->id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'category' => CategoryData::from([
-                'id' => $request->categoryId,
-                'name' => $request->categoryName,
-            ])
-        ]);
+        return get_object_vars($this);
     }
 }
