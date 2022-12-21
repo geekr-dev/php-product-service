@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateProductAction;
+use App\Http\Requests\GetProductsRequest;
 use App\Http\Requests\StoreProductRequest;
+use App\Models\Product;
 use Ecommerce\Common\DTOs\Product\ProductData;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,9 +17,17 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GetProductsRequest $request)
     {
-        //
+        $products = Product::search(
+            $request->getSearchTerm(),
+            $request->getSortBy(),
+            $request->getSortDirection(),
+        );
+
+        return [
+            'data' => $products->map->toData(),
+        ];
     }
 
     /**
