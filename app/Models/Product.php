@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Builders\ProductBuilder;
 use Ecommerce\Common\DTOs\Product\CategoryData;
 use Ecommerce\Common\DTOs\Product\ProductData;
 use Ecommerce\Common\Models\Concerns\HasUuid;
@@ -57,5 +58,10 @@ class Product extends Model
     public function getRouteKey()
     {
         return 'uuid';
+    }
+
+    public function newEloquentBuilder($query)
+    {
+        return new ProductBuilder($query);
     }
 }
